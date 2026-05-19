@@ -51,10 +51,18 @@ function authMiddleware(req,res,next){
    )
 
    req.user=users.find(
-      u=>u.id===decoded.id
-   )
+        u=>u.id===decoded.id
+    )
 
-   next()
+    if(!req.user){
+
+    return res.status(404).json({
+        message:"user tidak ditemukan"
+    })
+
+    }
+
+    next()
 
  }catch{
 
@@ -85,13 +93,13 @@ app.post('/api/auth/login',(req,res)=>{
  }
 
  const token=jwt.sign(
-
-   {
-      id:user.id
-   },
-
-   process.env.JWT_SECRET
-
+    {
+        id:user.id
+    },
+    process.env.JWT_SECRET,
+    {
+        expiresIn:"1d"
+    }
  )
 
  res.json({
@@ -101,18 +109,49 @@ app.post('/api/auth/login',(req,res)=>{
 
 })
 
-app.get(
- '/api/auth/me',
- authMiddleware,
- (req,res)=>{
+app.post('/api/auth/register',(req,res)=>{
 
- const {password,...safeUser}=req.user
+const newUser={
 
- res.json(
-   safeUser
- )
+id:users.length+1,
+
+...req.body,
+
+role:req.body.role || "warga"
+
+}
+
+users.push(newUser)
+
+res.json({
+message:"register berhasil"
+})
 
 })
+
+app.get(
+'/api/auth/me',
+authMiddleware,
+(req,res)=>{
+
+const {password,...user}=req.user
+
+res.json(user)
+
+})
+
+// app.get(
+//  '/api/auth/me',
+//  authMiddleware,
+//  (req,res)=>{
+
+//  const {password,...safeUser}=req.user
+
+//  res.json(
+//    safeUser
+//  )
+
+// })
 
 app.listen(
  process.env.PORT,
