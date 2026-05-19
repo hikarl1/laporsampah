@@ -6,6 +6,7 @@ import DashboardWarga from "./pages/DashboardWarga"
 import DashboardPetugas from "./pages/DashboardPetugas"
 import DashboardAdmin from "./pages/DashboardAdmin"
 import BuatLaporanPage from "./pages/BuatLaporanPage"
+import RegisterPage from "./pages/RegisterPage"
 
 function App(){
 
@@ -41,6 +42,11 @@ element={<DashboardAdmin/>}
 <Route
 path="/buat"
 element={<BuatLaporanPage/>}
+/>
+
+<Route
+path="/register"
+element={<RegisterPage/>}
 />
 
 </Routes>
