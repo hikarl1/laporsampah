@@ -1,6 +1,7 @@
 import {useState} from "react"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom" // Added Link here
 import api from "../utils/api"
+import laporSampahLogo from "../assets/laporsampah-logo.png"
 
 function RegisterPage(){
 
@@ -15,7 +16,7 @@ async function handleRegister(){
 try{
 
 await api.post(
-"/auth/register",
+"/api/auth/register",
 {
 nama,
 email,
@@ -56,40 +57,40 @@ padding:"50px"
 }}
 >
 
-<h1
-style={{
-fontSize:"50px",
-color:"#42b549"
-}}
+{}
+<img 
+  src={laporSampahLogo} 
+  alt="Lapor Sampah Logo" 
+  style={{
+    width: "400px", 
+    height: "auto",
+    marginBottom: "10px" 
+  }}
+/>
+
+<h2
+  style={{
+    margin: "0 0 10px 0", 
+    color: "#333",
+    textAlign: "center"
+  }}
 >
-
-🍃 LaporSampah
-
-</h1>
-
-<h2>Buat Akun Baru</h2>
+  Buat Akun Baru
+</h2>
 
 <p
 style={{
 width:"70%",
 textAlign:"center",
-color:"gray"
+color:"gray",
+lineHeight: "1.6",
+margin: "0"
 }}
 >
 
-Gabung untuk membantu menjaga kebersihan lingkungan
+Yuk, Gabung untuk membantu menjaga kebersihan lingkungan!
 
 </p>
-
-<div
-style={{
-fontSize:"120px"
-}}
->
-
-📝♻️
-
-</div>
 
 </div>
 
@@ -161,7 +162,19 @@ Daftar
 
 <p style={{marginTop:"15px"}}>
 
-Sudah punya akun? Masuk
+Sudah punya akun? 
+{}
+<Link
+  to="/"
+  style={{
+    marginLeft: "5px",
+    color: "#42b549",
+    textDecoration: "none",
+    fontWeight: "bold"
+  }}
+>
+  Masuk
+</Link>
 
 </p>
 
