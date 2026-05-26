@@ -1,4 +1,4 @@
-import {Routes,Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
@@ -6,47 +6,48 @@ import DashboardWarga from "./pages/DashboardWarga"
 import DashboardPetugas from "./pages/DashboardPetugas"
 import DashboardAdmin from "./pages/DashboardAdmin"
 import BuatLaporanPage from "./pages/BuatLaporanPage"
+import DetailLaporanWarga from "./pages/DetailLaporanWarga"
 
-function App(){
+function App() {
+  return (
+    <Routes>
+      <Route 
+        path="/" 
+        element={<LoginPage />} 
+      />
 
-return(
+      <Route 
+        path="/register" 
+        element={<RegisterPage />} 
+      />
 
-<Routes>
+      <Route 
+        path="/warga" 
+        element={<DashboardWarga />} 
+      />
 
-<Route
-path="/"
-element={<LoginPage/>}
-/>
+      <Route 
+        path="/petugas" 
+        element={<DashboardPetugas />} 
+      />
 
-<Route
-path="/register"
-element={<RegisterPage/>}
-/>
+      <Route 
+        path="/admin" 
+        element={<DashboardAdmin />} 
+      />
 
-<Route
-path="/warga"
-element={<DashboardWarga/>}
-/>
+      <Route 
+        path="/buat-laporan" 
+        element={<BuatLaporanPage />} 
+      />
 
-<Route
-path="/petugas"
-element={<DashboardPetugas/>}
-/>
-
-<Route
-path="/admin"
-element={<DashboardAdmin/>}
-/>
-
-<Route
-path="/buat"
-element={<BuatLaporanPage/>}
-/>
-
-</Routes>
-
-)
-
+      {}
+      <Route 
+        path="/laporan-saya" 
+        element={<DetailLaporanWarga />} 
+      />
+    </Routes>
+  )
 }
 
 export default App

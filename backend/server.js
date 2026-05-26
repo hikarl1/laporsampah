@@ -128,8 +128,21 @@ app.post("/api/laporan", upload.single("foto"), (req, res) => {
 
 // 3. Ambil Laporan Saya (Dibuat mandiri di luar kurung kurawal route lain)
 // UBAH ROUTE INI DI SERVER.JS BIAR BENAR-BENAR KOSONG DARI AWAL
+// ====== RUTE BARU UNTUK TRACKING & DETAIL LAPORAN WARGA ======
 app.get("/api/laporan/me", (req, res) => {
-  // Langsung kembalikan isi array laporan asli apa adanya (kosong [] di awal)
+  const { id } = req.query;
+
+  // 1. Jika warga meminta ID spesifik (misal dari halaman detail)
+  if (id) {
+    const detailLaporan = laporan.find(l => l.id === parseInt(id));
+    
+    if (!detailLaporan) {
+      return res.status(404).json({ message: "Laporan tidak ditemukan" });
+    }
+    return res.json(detailLaporan);
+  }
+
+  // 2. Jika tidak ada query ID, kembalikan semua list laporan milik warga (untuk halaman history/dashboard)
   res.json(laporan);
 });
 
